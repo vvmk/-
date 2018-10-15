@@ -21,3 +21,12 @@ func PopCount(x uint64) int {
 		pc[byte(x>>(6*8))] +
 		pc[byte(x>>(7*8))])
 }
+
+// PCLoop also returns to population count of x but using a loop
+func PCLoop(x uint64) int {
+	popCount := pc[byte(x>>(0*8))]
+	for i := 1; i < 8; i++ {
+		popCount += pc[byte(x>>(uint(i*8)))]
+	}
+	return int(popCount)
+}
